@@ -1,18 +1,18 @@
-## Getting Started
+Added generateMaze(), getNextCell() to Grid.java 
+Added removeWall(), getRow/Col(), check/setVisited() to GridCell.java 
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
 
-## Folder Structure
+// GridCell.java changes ==========================
+    checkVisited() checks cells visited state
+    setVisited() sets cells visited state to true
 
-The workspace contains two folders by default, where:
+    getRow/Col() gives the row and column
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+    removeWall() removes the wall between the 2 cells
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+// Grid.java changes ==============================
+    getNextCell() adds unvisited surrounding cells into an array and chooses one at random
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
-
-## Dependency Management
-
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+    generateMaze() uses a stack to keep track of the current path, which allows the DFS to backtrack when a deadend is reached, maze always starts at [0,0].
+    it uses getNextCell() to choose the direction
+    it updates each cell to visited as it passes through, until a complete maze is finished
