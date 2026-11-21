@@ -33,6 +33,19 @@ public class GridCell {
     public void setVisited() {
         this.visited = true;
     }
+    public boolean getTop(){
+        return top;
+    }
+    public boolean getLeft(){
+        return left;
+    }
+    public boolean getBottom(){
+        return bottom;
+    }
+    public boolean getRight(){
+        return right;
+    }
+
     // this. refers to curr.removeWall(next) in Grid.java 
     public void removeWall(GridCell next) {
         // Same row, either left or right

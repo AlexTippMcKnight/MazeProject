@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Grid {
     public GridCell[][] grid;
-    
+
     public Grid(int rows, int cols) {
         grid = new GridCell[rows][cols];
 
@@ -19,9 +19,6 @@ public class Grid {
         start.setVisited();
         stack.push(start);
 
-        //test visual ----------- remove later
-        System.out.println("Started at: [0,0]");
-
         while(!stack.isEmpty()) {
             GridCell curr = (GridCell) stack.peek();
             GridCell next = getNextCell(curr);
@@ -30,12 +27,8 @@ public class Grid {
                 curr.removeWall(next);
                 next.setVisited();
                 stack.push(next);
-                //test visual ----------- remove later
-                System.out.println("Moved to: [" + next.getRow() + "," + next.getCol() + "]");
             } else {
                 stack.pop();
-                //test visual ----------- remove later
-                System.out.println("Backtracking from: [" + curr.getRow() + "," + curr.getCol() + "]");
             }
         }
 
@@ -72,21 +65,4 @@ public class Grid {
         }
     }//end of getNextCell
 
-    public void printGrid() {
-        for(int row= 0; row < grid.length; row++){
-            for(int col = 0; col < grid[row].length; col++){
-                System.out.print("[" + row + "," + col + "] ");
-            }
-            System.out.println();
-        }
-    }//end of printGrid
-
-    public static void main(String[] args) {
-        Grid grid = new Grid(3, 3);
-        grid.printGrid();
-
-        grid.generateMaze();
-
-
-    }//end of main
 }//end of class
