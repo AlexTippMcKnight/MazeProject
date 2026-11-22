@@ -7,7 +7,7 @@ public class MazeVisual extends JFrame {
         setTitle("The Maze");
         setSize(600, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Grid maze = new Grid(100, 100);
+        Grid maze = new Grid(50, 50);
         maze.generateMaze();
         add(new MazeCanvas(maze.grid));
     }

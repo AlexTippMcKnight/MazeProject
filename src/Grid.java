@@ -1,4 +1,5 @@
 import java.util.*;
+import lib.*;
 
 public class Grid {
     public GridCell[][] grid;
@@ -16,7 +17,7 @@ public class Grid {
     public void generateMaze() {
         StackReferenceBased stack = new StackReferenceBased();
         GridCell start = grid[0][0];
-        start.setVisited();
+        start.setVisited(true);
         stack.push(start);
 
         while(!stack.isEmpty()) {
@@ -25,7 +26,7 @@ public class Grid {
 
             if(next != null) {
                 curr.removeWall(next);
-                next.setVisited();
+                next.setVisited(true);
                 stack.push(next);
             } else {
                 stack.pop();
@@ -65,4 +66,11 @@ public class Grid {
         }
     }//end of getNextCell
 
+    public void resetVisited(){
+        for(int i= 0; i< grid.length; i++) {
+            for(int j = 0; j< grid[0].length; j++) {
+                grid[i][j].setVisited(false);
+            }
+        }
+    }// end of resetVisited
 }//end of class

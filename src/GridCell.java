@@ -30,19 +30,19 @@ public class GridCell {
     public boolean checkVisited() {
         return visited;
     }
-    public void setVisited() {
-        this.visited = true;
+    public void setVisited(boolean b) {
+        this.visited = b;
     }
-    public boolean getTop(){
+    public boolean getTop() {
         return top;
     }
-    public boolean getLeft(){
+    public boolean getLeft() {
         return left;
     }
-    public boolean getBottom(){
+    public boolean getBottom() {
         return bottom;
     }
-    public boolean getRight(){
+    public boolean getRight() {
         return right;
     }
 

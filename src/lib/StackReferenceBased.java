@@ -1,3 +1,4 @@
+package lib;
 public class StackReferenceBased implements StackInterface
 {
   private Node top;

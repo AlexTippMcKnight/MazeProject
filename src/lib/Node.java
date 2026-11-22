@@ -1,3 +1,4 @@
+package lib;
 public class Node
 {
   private Object item;

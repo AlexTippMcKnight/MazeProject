@@ -1,3 +1,4 @@
+package lib;
 public interface StackInterface
 {
   public boolean isEmpty();
