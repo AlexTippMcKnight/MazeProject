@@ -1,14 +1,20 @@
 public class GridCell {
+    
+    //Position
     private int row;
     private int col;
 
+    //Walls
     private boolean top;
     private boolean bottom;
     private boolean left;
     private boolean right;
-
+    //Tracking
     private boolean visited;
+    //BFS
+    private GridCell previousCell;
 
+    //Makes a Cell with walls
     public GridCell(int row, int col) {
         this.row = row;
         this.col = col;
@@ -21,18 +27,23 @@ public class GridCell {
         this.visited = false;
     }
 
+    //Position
     public int getRow() {
         return row;
     }
     public int getCol() {
         return col;
     }
+
+    //Tracking
     public boolean checkVisited() {
         return visited;
     }
     public void setVisited(boolean b) {
         this.visited = b;
     }
+
+    //Wall Checking
     public boolean getTop() {
         return top;
     }
@@ -46,6 +57,15 @@ public class GridCell {
         return right;
     }
 
+    //BFS - Solution
+    public GridCell getPreviousCell() {
+        return previousCell;
+    }
+    public void setPreviousCell(GridCell cell) {
+        previousCell = cell;
+    }
+
+    //DFS
     // this. refers to curr.removeWall(next) in Grid.java 
     public void removeWall(GridCell next) {
         // Same row, either left or right
@@ -73,4 +93,5 @@ public class GridCell {
             }
         }
     }//end of removeWall
+
 }

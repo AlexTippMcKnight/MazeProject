@@ -2,8 +2,11 @@ import java.util.*;
 import lib.*;
 
 public class Grid {
-    public GridCell[][] grid;
 
+    public GridCell[][] grid;
+    public ArrayList<GridCell> solution = new ArrayList<>();
+
+    //BoxGrid
     public Grid(int rows, int cols) {
         grid = new GridCell[rows][cols];
 
@@ -14,6 +17,7 @@ public class Grid {
         }
 
     }//end of grid
+    //DFS - removes walls for maze
     public void generateMaze() {
         StackReferenceBased stack = new StackReferenceBased();
         GridCell start = grid[0][0];
@@ -32,9 +36,39 @@ public class Grid {
                 stack.pop();
             }
         }
-
     }//end of generateMaze
 
+    public void solveMaze() {
+        QueueArrayBased queue = new QueueArrayBased();
+        GridCell start = grid[0][0];
+        resetVisited();
+        start.setVisited(true);
+        queue.enqueue(start);
+
+        while(!queue.isEmpty()) {
+            GridCell curr = (GridCell) queue.dequeue();
+            ArrayList<GridCell> nextCells = getNextCells(curr);
+
+            //Adds all cell choices to queue
+            for(int i= 0; i< nextCells.size(); i++){
+                GridCell next = nextCells.get(i);
+                next.setPreviousCell(curr);
+                next.setVisited(true);
+                queue.enqueue(next);
+            }
+        }
+
+        //Backtracks solution and saves to arrayList
+        GridCell currentCell = grid[grid.length - 1][grid[0].length - 1];
+
+        while(currentCell != null) {
+            solution.add(currentCell);
+            currentCell = currentCell.getPreviousCell();
+        }
+
+    }//end of solveMaze
+
+    //DFS - random cell for DFS
     public GridCell getNextCell(GridCell curr) {
         int row = curr.getRow();
         int col = curr.getCol();
@@ -62,10 +96,40 @@ public class Grid {
         if(unvisitedCells.isEmpty()) {
             return null; // No unvisited cells
         }else {
+            //return random choice
             return unvisitedCells.get((int)(Math.random() * unvisitedCells.size()));
         }
     }//end of getNextCell
 
+    // BFS - available cells for BFS
+    public ArrayList<GridCell> getNextCells(GridCell curr) {
+        int row = curr.getRow();
+        int col = curr.getCol();
+
+        ArrayList<GridCell> unvisitedCells = new ArrayList<>();
+
+        // same as getNextCell checks for walls aswell
+        // check top cell
+        if(row > 0 && !grid[row - 1][col].checkVisited() && !curr.getTop()) {
+            unvisitedCells.add(grid[row - 1][col]);
+        }
+        // check left cell
+        if(col > 0 && !grid[row][col - 1].checkVisited() && !curr.getLeft()) {
+            unvisitedCells.add(grid[row][col - 1]);
+        }
+        // check bottom cell
+        if(row < grid.length - 1 && !grid[row + 1][col].checkVisited() && !curr.getBottom()) {
+            unvisitedCells.add(grid[row + 1][col]);
+        }
+        // check right cell
+        if(col < grid[0].length - 1 && !grid[row][col + 1].checkVisited() && !curr.getRight()) {
+            unvisitedCells.add(grid[row][col + 1]);
+        }
+
+        return unvisitedCells;
+    }//end of getNextCell
+
+    //Resets for BFS to use maze
     public void resetVisited(){
         for(int i= 0; i< grid.length; i++) {
             for(int j = 0; j< grid[0].length; j++) {
@@ -73,4 +137,5 @@ public class Grid {
             }
         }
     }// end of resetVisited
+    
 }//end of class

@@ -1,3 +1,13 @@
-Added resetVisited(), for the solver to be able to check visited correctly
+Added comments explaining what each part does
 
-Add Queue files, and moved stack/node files to lib folder to clean up project
+-- Grid.java --
+Added solveMaze()
+Added getNextCells()
+
+-- GridCell.java --
+Added variable previousCell
+Added getPreviousCell()
+Added setPreviousCell()
+
+-- MazeCanvas.java --
+Added the drawing of the solution line
